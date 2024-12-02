@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: hotpink;
+}
+div {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    
+    img {
+        transition: .5s;
+        filter: brightness(0);
+        width: 100px;
+        aspect-ratio: 4/6;
+        object-fit: cover;
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(1);
+            transform: translateZ(200px);
+
+            + * {
+                filter: brightness(.6);
+                transform: translateZ(150px) rotateY(40deg);
+            }
+            + * + * {
+                filter: brightness(.3);
+                transform: translateZ(70px) rotateY(20deg);
+            }
+        }
+        &:has(+ *:hover) {
+            filter: brightness(.6);
+            transform: translateZ(150px) rotateY(-40deg);
+        }
+        &:has(+ * + *:hover) {
+            filter: brightness(.3);
+            transform: translateZ(70px) rotateY(-20deg);
+        }
+    }
+}
